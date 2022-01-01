@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game/shape.dart';
+import 'package:game/screens/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,84 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  bool isCircleClicked = false;
-  bool isUndo = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('GoodApp ')),
-      ),
-      body: SafeArea(
-          child: Container(
-        color: Colors.white,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: RepaintBoundary(
-            child: CustomPaint(
-              painter:
-                  MyShapePainter(isCircle: isCircleClicked, isUndo: isUndo),
-            ),
-          ),
-        ),
-      )),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  isUndo = false;
-                  isCircleClicked = true;
-                });
-              },
-              child: const Icon(Icons.circle_outlined),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                                    isUndo = false;
-
-                  isCircleClicked = false;
-                });
-              },
-              child: const Icon(Icons.crop_square),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  isUndo = true;
-                });
-              },
-              child: const Icon(Icons.undo),
-            ),
-          ),
-        ],
-      ),
+      home:  const MyHomePage(),
     );
   }
 }
