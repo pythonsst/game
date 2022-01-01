@@ -30,30 +30,30 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isCircleClicked = false;
+  bool isUndo = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child:  Text('GoodApp ')),
+        title: const Center(child: Text('GoodApp ')),
       ),
       body: SafeArea(
-        child: Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.all(32.0),
-               // child: Text('$isCircleClicked'),
-                child: RepaintBoundary(
-                  child: CustomPaint(
-                    painter: MyShapePainter(isCircle: isCircleClicked),
-                  ),
-                ),
-              ),
-            )),
-      
-      bottomNavigationBar:  Row(
+          child: Container(
+        color: Colors.white,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: RepaintBoundary(
+            child: CustomPaint(
+              painter:
+                  MyShapePainter(isCircle: isCircleClicked, isUndo: isUndo),
+            ),
+          ),
+        ),
+      )),
+      bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Padding(
@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: FloatingActionButton(
               onPressed: () {
                 setState(() {
+                  isUndo = false;
                   isCircleClicked = true;
                 });
               },
@@ -72,6 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: FloatingActionButton(
               onPressed: () {
                 setState(() {
+                                    isUndo = false;
+
                   isCircleClicked = false;
                 });
               },
@@ -81,7 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton(
-              onPressed: ()=>{},
+              onPressed: () {
+                setState(() {
+                  isUndo = true;
+                });
+              },
               child: const Icon(Icons.undo),
             ),
           ),
